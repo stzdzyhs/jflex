@@ -82,8 +82,8 @@ public class Symbol {
 
 /*. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .*/
 
-  /** The symbol number of the terminal or non terminal being represented */
-  public int sym;
+  	/** The symbol number of the terminal or non terminal being represented */
+  	public int sym;
 
   /*. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .*/
 
@@ -100,13 +100,15 @@ public class Symbol {
   The data passed to parser
  *******************************/
 
-  public int left, right;
-  public Object value;
+	public int left, right;
+	public Object value;
 
-  /*****************************
-    Printing this token out. (Override for pretty-print).
-    ****************************/
-  public String toString() { return "#"+sym; }
+  	/*****************************
+     Printing this token out. (Override for pretty-print).
+  	 ****************************/
+  	public String toString() { 
+  		return "#"+sym; 
+  	}
 }
 
 

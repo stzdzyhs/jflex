@@ -20,27 +20,27 @@ package jflex;
  */
 final class IntPair {
 
-  int start;
-  int end;
+	int start;
+	int end;
   
-  IntPair(int start, int end) {
-    this.start = start;
-    this.end = end;
-  }
+	IntPair(int start, int end) {
+		this.start = start;
+		this.end = end;
+	}
 
-  public int hashCode() {
-    return end + (start << 8);
-  }  
+	public int hashCode() {
+		return end + (start << 8);
+	}  
   
-  public boolean equals(Object o) {
-    if ( o instanceof IntPair ) {
-      IntPair p = (IntPair) o;
-      return start == p.start && end == p.end;
-    }
-    return false;
-  }
+	public boolean equals(Object o) {
+		if ( o instanceof IntPair ) {
+			IntPair p = (IntPair) o;
+			return start == p.start && end == p.end;
+		}
+		return false;
+	}
   
-  public String toString() {
-    return "("+start+","+end+")";
-  }
+	public String toString() {
+		return "("+start+","+end+")";
+	}
 } 

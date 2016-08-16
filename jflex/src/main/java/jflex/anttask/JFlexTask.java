@@ -10,15 +10,18 @@
 
 package jflex.anttask;
 
-import org.apache.tools.ant.Task;
-import org.apache.tools.ant.BuildException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import jflex.Main;
 import jflex.Options;
 
-import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Task;
 
 /**
  * JFlex task class
@@ -27,17 +30,17 @@ import java.util.regex.Pattern;
  * @version JFlex 1.7.0-SNAPSHOT
  */
 public class JFlexTask extends Task {
-  private static final Pattern PACKAGE_PATTERN = Pattern.compile("package\\s+(\\S+)\\s*;");
-  private static final Pattern CLASS_PATTERN = Pattern.compile("%class\\s+(\\S+)");
+	private static final Pattern PACKAGE_PATTERN = Pattern.compile("package\\s+(\\S+)\\s*;");
+	private static final Pattern CLASS_PATTERN = Pattern.compile("%class\\s+(\\S+)");
 
-  private File inputFile;
+	private File inputFile;
 
-  // found out by looking into .flex file
-  private String className = null;
-  private String packageName = null;
+	// found out by looking into .flex file
+	private String className = null;
+	private String packageName = null;
 
-  /** for javac-like dest dir behaviour */
-  private File destinationDir;
+	/** for javac-like dest dir behaviour */
+	private File destinationDir;
 
   /** the actual output directory (outputDir = destinationDir + package)) */
   private File outputDir = null;

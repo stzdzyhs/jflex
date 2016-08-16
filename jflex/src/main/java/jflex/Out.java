@@ -10,10 +10,14 @@
 package jflex;
 
 
-import jflex.unicode.UnicodeProperties;
-
-import java.io.*;
 import java.awt.TextArea;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import jflex.unicode.UnicodeProperties;
 
 
 /**
@@ -33,50 +37,50 @@ import java.awt.TextArea;
  */
 public final class Out {
 
-  /** platform dependent newline sequence */
-  public static final String NL = System.getProperty("line.separator");
+	/** platform dependent newline sequence */
+	public static final String NL = System.getProperty("line.separator");
   
-  /** count total warnings */
-  private static int warnings;
+	/** count total warnings */
+	private static int warnings;
 
-  /** count total errors */
-  private static int errors;
+	/** count total errors */
+	private static int errors;
 
-  /** output device */
-  private static StdOutWriter out = new StdOutWriter();
+  	/** output device */
+  	private static StdOutWriter out = new StdOutWriter();
 
 
-  /**
-   * Switches to GUI mode if <code>text</code> is not <code>null</code>
-   *
-   * @param text  the message TextArea of the JFlex GUI
-   */
-  public static void setGUIMode(TextArea text) {
-    out.setGUIMode(text);
-  }
+  	/**
+  	 * Switches to GUI mode if <code>text</code> is not <code>null</code>
+  	 *
+  	 * @param text  the message TextArea of the JFlex GUI
+  	 */
+  	public static void setGUIMode(TextArea text) {
+  		out.setGUIMode(text);
+  	}
   
-  /**
-   * Sets a new output stream and switches to non-gui mode.
-   * 
-   * @param stream  the new output stream
-   */
-  public static void setOutputStream(OutputStream stream) {
-    out = new StdOutWriter(stream);
-    out.setGUIMode(null);
-  }
+  	/**
+  	 * Sets a new output stream and switches to non-gui mode.
+  	 * 
+  	 * @param stream  the new output stream
+  	 */
+  	public static void setOutputStream(OutputStream stream) {
+  		out = new StdOutWriter(stream);
+  		out.setGUIMode(null);
+  	}
 
-  /**
-   * Report time statistic data.
-   *
-   * @param message  the message to be printed
-   * @param time     elapsed time
-   */
-  public static void time(ErrorMessages message, Timer time) {
-    if (Options.time) {
-      String msg = ErrorMessages.get(message, time.toString());
-      out.println(msg);
-    } 
-  }
+  	/**
+  	 * Report time statistic data.
+  	 *
+  	 * @param message  the message to be printed
+  	 * @param time     elapsed time
+  	 */
+  	public static void time(ErrorMessages message, Timer time) {
+  		if (Options.time) {
+  			String msg = ErrorMessages.get(message, time.toString());
+  			out.println(msg);
+  		} 
+  	}
   
   /**
    * Report time statistic data.
@@ -154,7 +158,9 @@ public final class Out {
    * @message the message to be printed 
    */
   public static void dump(String message) {
-    if (Options.dump) out.println(message);
+    if (Options.dump) {
+    	out.println(message);    	
+    }
   }
 
   

@@ -9,9 +9,20 @@
 
 package jflex.gui;
 
-import java.awt.*;
-import java.awt.event.*;
-
+import java.awt.Button;
+import java.awt.Checkbox;
+import java.awt.Dialog;
+import java.awt.FileDialog;
+import java.awt.Frame;
+import java.awt.Insets;
+import java.awt.Label;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import jflex.GeneratorException;
