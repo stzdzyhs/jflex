@@ -586,57 +586,57 @@ final public class NFA {
     return result.toString();
   }
 
-  public void writeDot(File file) {
-    try {
-      PrintWriter writer = new PrintWriter(new FileWriter(file));
-      writer.println(dotFormat());
-      writer.close();
-    }
-    catch (IOException e) {
-      Out.error(ErrorMessages.FILE_WRITE, file);
-      throw new GeneratorException();
-    }
-  }
+  	public void writeDot(File file) {
+  		try {
+  			PrintWriter writer = new PrintWriter(new FileWriter(file));
+  			writer.println(dotFormat());
+  			writer.close();
+	    }
+	    catch (IOException e) {
+	    	Out.error(ErrorMessages.FILE_WRITE, file);
+	    	throw new GeneratorException();
+	    }
+  	}
 
-  public String dotFormat() {
-    StringBuilder result = new StringBuilder();
+  	public String dotFormat() {
+  		StringBuilder result = new StringBuilder();
 
-    result.append("digraph NFA {").append(Out.NL);
-    result.append("rankdir = LR").append(Out.NL);
+	    result.append("digraph NFA {").append(Out.NL);
+	    result.append("rankdir = LR").append(Out.NL);
+	
+	    for (int i=0; i < numStates; i++) {
+	    	if ( isFinal[i] ) {
+	    		result.append(i);
+	    		result.append(" [shape = doublecircle]");
+	    		result.append(Out.NL);
+	    	}      
+	    }
+	
+	    for (int i=0; i < numStates; i++) {
+	    	for (int input = 0; input < numInput; input++) {
+	    		if ( table[i][input] != null ) {
+	    			StateSetEnumerator states = table[i][input].states();
+	        
+	    			while (states.hasMoreElements()) {
+	    				int s = states.nextElement();
+	    				result.append(i).append(" -> ").append(s);
+	    				result.append(" [label=\"").append(classes.toString(input)).append("\"]").append(Out.NL);
+	    			}
+	    		}
+	    	}
+	    	if ( epsilon[i] != null ) {
+	    		StateSetEnumerator states = epsilon[i].states();
+	    		while (states.hasMoreElements()) {
+	    			int s = states.nextElement();
+	    			result.append(i).append(" -> ").append(s).append(" [style=dotted]").append(Out.NL);
+	    		}
+	    	}
+	    }
+	
+	    result.append("}").append(Out.NL);
 
-    for (int i=0; i < numStates; i++) {
-      if ( isFinal[i] ) {
-          result.append(i);
-          result.append(" [shape = doublecircle]");
-          result.append(Out.NL);
-      }      
-    }
-
-    for (int i=0; i < numStates; i++) {
-      for (int input = 0; input < numInput; input++) {
-	      if ( table[i][input] != null ) {
-          StateSetEnumerator states = table[i][input].states();
-        
-          while (states.hasMoreElements()) {
-            int s = states.nextElement();
-            result.append(i).append(" -> ").append(s);
-            result.append(" [label=\"").append(classes.toString(input)).append("\"]").append(Out.NL);
-          }
-        }
-      }
-      if ( epsilon[i] != null ) {
-        StateSetEnumerator states = epsilon[i].states();
-        while (states.hasMoreElements()) {
-          int s = states.nextElement();
-          result.append(i).append(" -> ").append(s).append(" [style=dotted]").append(Out.NL);
-        }
-      }
-    }
-
-    result.append("}").append(Out.NL);
-
-    return result.toString();
-  }
+	    return result.toString();
+  	}
 
 
   //-----------------------------------------------------------------------

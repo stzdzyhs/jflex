@@ -64,11 +64,9 @@ final public class StateSet {
 		}
 	}
 
-
 	private int size2nbits (int size) {
 		return ((size >> BITS) + 1);
 	}
-
 
 	private void resize(int size) {
 		int needed = size2nbits(size);
@@ -86,7 +84,12 @@ final public class StateSet {
 		int l = bits.length;
 		for (int i = 0; i < l; i++) bits[i] = 0;
 	}
-
+	
+	/**
+	 * test if the state is set.
+	 * @param state - the state
+	 * @return
+	 */
 	public boolean isElement(int state) {
 		int index = state >> BITS;
 		if (index >= bits.length)  return false;
@@ -115,6 +118,10 @@ final public class StateSet {
 		return (i << BITS) + o;
 	}
 
+	/**
+	 * remove state
+	 * @param state
+	 */
 	public void remove(int state) {
 		int index = state >> BITS;
 		if (index >= bits.length) return;
